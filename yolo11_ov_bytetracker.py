@@ -130,7 +130,6 @@ def pre_decode():
 def input_thread():
     global abort_flag
     global input_quque
-    cap = None
 
     frames = pre_decode()   # Decode the input movie in advance
     nframe = 0
@@ -146,7 +145,6 @@ def input_thread():
         while input_quque.qsize() > 100 and abort_flag == False:       # Prevent excessive queue growth
             time.sleep(10e-3)
         input_quque.put((tensor, img))
-    cap.release()
 
 
 def rendering_thread():
@@ -188,7 +186,7 @@ def main():
     fps_count = 10
     count = 0
 
-    device = 'CPU'  # Inference device, can be 'GPU.0', 'GPU.1', 'CPU', 'NPU' etc. 'GPU.1' is an external GPU and 'GPU.0' is an internal GPU.
+    device = 'GPU.1'  # Inference device, can be 'GPU.0', 'GPU.1', 'CPU', 'NPU' etc. 'GPU.1' is an external GPU and 'GPU.0' is an internal GPU.
     model = prepare_openvino_model(device=device)  # Prepare and Load OpenVINO model
 
     input_th = threading.Thread(target=input_thread, daemon=True)

@@ -5,6 +5,8 @@ import os
 import numpy as np
 os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
 import cv2
+import queue
+import threading
 
 import time
 
@@ -29,16 +31,46 @@ fps = 0
 
 stime = time.perf_counter()
 
+def display_frame_thread():
+    global abort_flag
+    global output_quque
+    while not abort_flag:
+        while output_quque.empty() and not abort_flag:
+            time.sleep(0.01)
+        if abort_flag:
+            break
+        img = output_quque.get()
+        cv2.imshow('YOLO11n+Ultralytics(TRT i8)', img)
+        key = cv2.waitKey(1)
+        if key == 27:  # ESC key
+            abort_flag = True
+    cv2.destroyAllWindows()
+
+def pre_decode():
+    frames = []
+    cap = cv2.VideoCapture('people.mp4')
+    while True:
+        sts, img = cap.read()
+        if sts == False or img is None:
+            break
+        frames.append(img)
+    cap.release()
+    return frames
+
+nframe = 0
+frames = pre_decode()   # Decode the input movie in advance
+output_quque = queue.Queue()
+abort_flag = False
+
+output_th = threading.Thread(target=display_frame_thread, daemon=True)
+output_th.start()
 
 while key != 27:
-    if cap is None:
-        cap = cv2.VideoCapture('people.mp4')
-    sts, img = cap.read()        
-    if sts == False or img is None:
-        cap.release()
-        cap = None
-        continue
 
+    img = frames[nframe]
+    nframe += 1
+    if len(frames) <= nframe:
+        nframe = 0 
     img = cv2.resize(img, (640, 640))
 
     results = model.track(img, device='cuda', tracker='bytetrack.yaml', persist=True, verbose=False)
@@ -62,8 +94,8 @@ while key != 27:
     cv2.putText(frame, text, (0, 40), cv2.FONT_HERSHEY_PLAIN, 1.8, (0, 0, 0), 6)
     cv2.putText(frame, text, (0, 40), cv2.FONT_HERSHEY_PLAIN, 1.8, (0, 255, 0), 2)
 
-    cv2.imshow('result', frame)
-    key = cv2.waitKey(1)
+    if not output_quque.full():
+        output_quque.put(frame)
 
     count += 1
     if count == fps_count:
@@ -75,4 +107,3 @@ while key != 27:
         count = 0
 
 cv2.destroyAllWindows()
-cap.release()
