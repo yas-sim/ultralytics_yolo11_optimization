@@ -19,7 +19,7 @@ if not os.path.exists('./yolo11n.engine'):
     model = YOLO('yolo11n.pt', task='detect')
     model.export(format='engine', half=True, simplify=True, imgsz=640)
 
-model = YOLO('yolo11n.engine')
+model = YOLO('yolo11n_int8.engine')
 
 cap = None
 key = -1
@@ -65,7 +65,7 @@ abort_flag = False
 output_th = threading.Thread(target=display_frame_thread, daemon=True)
 output_th.start()
 
-while key != 27:
+while key != 27 and not abort_flag:
 
     img = frames[nframe]
     nframe += 1
@@ -106,4 +106,4 @@ while key != 27:
         stime = etime
         count = 0
 
-cv2.destroyAllWindows()
+output_th.join()
