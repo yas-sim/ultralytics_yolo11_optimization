@@ -8,7 +8,7 @@ import cv2
 
 import time
 
-model = YOLO('yolo11n.pt', task='detect')
+model = YOLO('yolo11n.pt', task='detect').to('cpu')
 
 cap = None
 key = -1
@@ -33,8 +33,7 @@ while key != 27:
     img = cv2.resize(img, (640, 640))
 
     a = model.predict(img)
-    print(a)
-    results = model.track(img, device='cuda', tracker='bytetrack.yaml', persist=True, verbose=False)
+    results = model.track(img, device='cpu', tracker='bytetrack.yaml', persist=True, verbose=False)
     result = results[0]
     if result.boxes and result.boxes.is_track:
         boxes = result.boxes.xywh.cpu()
