@@ -23,4 +23,6 @@ The code optimize is done only for object detection part. ByteTrack algorithm ar
 - You need to download yolo11 model from Hailo Model Zoo ('`yolov11n.hef`')
 - Hailo-8 is installed in a m.2-Thunderbolt4 box, and connected to the notebook PC via USB-C cable (Thunderbolt)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/BGHqf6u8xdE?si=ltnT5z3-LFyrx4tQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## Movie
+
+[!['Youtube demo movie'](./resources/youtube_thumbnail.png)](https://youtu.be/BGHqf6u8xdE?si=Mmm2EppJ39mBCAG_)
