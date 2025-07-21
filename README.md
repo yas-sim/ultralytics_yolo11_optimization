@@ -25,4 +25,4 @@ The code optimize is done only for object detection part. ByteTrack algorithm ar
 
 ## Movie
 
-[!['Youtube demo movie'](./resources/youtube_thumbnail.png)](https://youtu.be/BGHqf6u8xdE?si=Mmm2EppJ39mBCAG_)
+[!['Youtube demo movie'](./resources/youtube_thumbnail.png)](https://youtu.be/ID7BPbTEiI4)

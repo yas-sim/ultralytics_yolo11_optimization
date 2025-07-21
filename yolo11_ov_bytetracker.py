@@ -186,7 +186,7 @@ def main():
     fps_count = 10
     count = 0
 
-    device = 'CPU'  # Inference device, can be 'GPU.0', 'GPU.1', 'CPU', 'NPU' etc. 'GPU.1' is an external GPU and 'GPU.0' is an internal GPU.
+    device = 'GPU.0'  # Inference device, can be 'GPU.0', 'GPU.1', 'CPU', 'NPU' etc. 'GPU.1' is an external GPU and 'GPU.0' is an internal GPU.
     model = prepare_openvino_model(device=device)  # Prepare and Load OpenVINO model
 
     input_th = threading.Thread(target=input_thread, daemon=True)
