@@ -19,10 +19,34 @@ The code optimize is done only for object detection part. ByteTrack algorithm ar
 - OS: Windows 11
 - OpenVINO: 2025.2.0
 
-## Note
+## How to setup the environment
+
+1. Install required Python modules
+
+### Windows
+```sh
+python -m venv venv
+venv\Scripts\activate
+python -m pip install -U pip
+pip install -U setuptools wheel
+pip install -r requirements.txt
+```
+### Linux
+```sh
+python3 -m venv venv
+. venv/bin/activate
+python3 -m pip install -U pip
+pip install -U setuptools wheel
+pip install -r requirements.txt
+```
+*Note:* 
+- You need to install TensorRT for CUDA/TRT version, and HailoRT for Hailo-8 version. Please go and refer to the vendor's web documents for the details.  
+
 - You need to download yolo11 model from [Hailo Model Zoo](https://github.com/hailo-ai/hailo_model_zoo) ('[`yolov11n.hef`](https://hailo-model-zoo.s3.eu-west-2.amazonaws.com/ModelZoo/Compiled/v2.16.0/hailo8/yolov11n.hef)')
-- Hailo-8 is installed in a m.2-Thunderbolt4 box, and connected to the notebook PC via USB-C cable (Thunderbolt)
 
 ## Movie
 
 [!['Youtube demo movie'](./resources/youtube_thumbnail.jpg)](https://www.youtube.com/watch?v=ID7BPbTEiI4)
+
+## Remarks
+- Hailo-8 is installed in a m.2-Thunderbolt4 box, and connected to the notebook PC via USB-C cable (Thunderbolt) in my test

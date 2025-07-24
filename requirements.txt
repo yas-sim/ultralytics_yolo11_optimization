@@ -1,0 +1,5 @@
+nncf[torch]
+numpy
+opencv-python
+openvino
+ultralytics
