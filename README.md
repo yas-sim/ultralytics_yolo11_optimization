@@ -44,6 +44,10 @@ pip install -r requirements.txt
 
 - You need to download yolo11 model from [Hailo Model Zoo](https://github.com/hailo-ai/hailo_model_zoo) ('[`yolov11n.hef`](https://hailo-model-zoo.s3.eu-west-2.amazonaws.com/ModelZoo/Compiled/v2.16.0/hailo8/yolov11n.hef)')
 
+## Demo images  
+![OpenVINO optimization](./resources/openvino_opt.png)  
+![Hailo-8 and RTX3050](./resources/hailo_opt.png)]
+
 ## Movie
 
 [!['Youtube demo movie'](./resources/youtube_thumbnail.jpg)](https://www.youtube.com/watch?v=ID7BPbTEiI4)

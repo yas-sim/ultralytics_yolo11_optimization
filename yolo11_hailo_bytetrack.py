@@ -225,7 +225,6 @@ def main():
             bindings = configured_infer_model.create_bindings()
             buffer = np.zeros(infer_model.output().shape).astype(np.float32)
             bindings.output().set_buffer(buffer)
-
             # Run asynchronous inference
             queue_size = configured_infer_model.get_async_queue_size()
             print(f'Async queue size: {queue_size}')
@@ -238,7 +237,7 @@ def main():
                     break
                 tensor, img = input_quque.get()
 
-                bindings.input().set_buffer(tensor)
+                bindings.input("yolov11n/input_layer1").set_buffer(tensor)
 
                 configured_infer_model.wait_for_async_ready()
                 job = configured_infer_model.run_async(
