@@ -46,7 +46,7 @@ pip install -r requirements.txt
 
 ## Demo images  
 ![OpenVINO optimization](./resources/openvino_opt.png)  
-![Hailo-8 and RTX3050](./resources/hailo_opt.png)]
+![Hailo-8 and RTX3050](./resources/hailo.png)]
 
 ## Movie
 
